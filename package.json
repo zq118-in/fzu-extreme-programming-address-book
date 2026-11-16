@@ -1,0 +1,12 @@
+{
+  "name": "fzu-extreme-programming-address-book",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Extreme Programming assignment by Liu Peikun (832401213)",
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "engines": { "node": ">=20" }
+}
