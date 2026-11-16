@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#176358">
+  <meta name="description" content="邻簿：支持收藏、多种联系方式和 Excel 导入导出的本地通讯录。">
+  <title>邻簿 Linbook · 把联系放在心上</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="vendor/xlsx.full.min.js"></script>
+  <script type="module" src="scripts/app.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="./" aria-label="邻簿首页"><span class="brand-icon">邻</span><span>邻簿 <small>LINBOOK</small></span></a>
+      <div class="workspace-label">我的工作空间 <span>PERSONAL</span></div>
+      <nav aria-label="通讯录分类">
+        <button class="nav-item active" id="nav-all" aria-pressed="true"><span class="nav-symbol">▦</span>全部联系人 <span class="nav-count" id="nav-total">0</span></button>
+        <button class="nav-item" id="nav-favorites" aria-pressed="false"><span class="nav-symbol">☆</span>我的收藏 <span class="nav-count" id="nav-favorite-count">0</span></button>
+      </nav>
+      <div class="sidebar-note"><span class="note-graphic" aria-hidden="true">✧</span><h2>每一次联系，<br>都值得被记住。</h2><p>为重要的人留一个位置，<br>让下一次问候更容易。</p></div>
+      <div class="sidebar-bottom"><span class="status-dot"></span><span>数据保存在此浏览器</span><button id="load-demo" class="text-button">载入演示</button></div>
+    </aside>
+
+    <main>
+      <header class="topbar"><div class="breadcrumb">工作空间 <span>/</span> 通讯录</div><span class="local-badge"><span class="status-dot"></span>本地存储</span></header>
+      <div class="main-inner">
+        <section class="page-heading"><div><p class="eyebrow">STAY CONNECTED, STAY CLOSE</p><h1>把联系，放在心上<span>。</span></h1><p class="subtitle">整理每一种联系方式，留住每一份重要的连接。</p></div><button class="button button-primary" id="add-contact"><span aria-hidden="true">＋</span> 新建联系人</button></section>
+        <div id="storage-warning" class="warning" hidden role="alert"></div>
+        <section class="stats" aria-label="通讯录概览"><div class="stat-card"><div><span>联系人总数</span><strong id="stat-total">0</strong></div><span class="stat-icon" aria-hidden="true">♧</span><p>让每一份连接清晰可见</p></div><div class="stat-card"><div><span>重要联系人</span><strong id="stat-favorites">0</strong></div><span class="stat-icon warm" aria-hidden="true">☆</span><p>常用联系，一眼找到</p></div><div class="stat-card"><div><span>联系方式总数</span><strong id="stat-methods">0</strong></div><span class="stat-icon blue" aria-hidden="true">↗</span><p>电话、邮箱与更多可能</p></div></section>
+        <section class="contacts-section" aria-labelledby="list-title">
+          <div class="section-heading"><div class="section-label"><h2 id="list-title">全部联系人</h2><span id="result-count" class="count-pill">0 位</span></div><div class="toolbar"><button class="button button-outline" id="import-open"><span aria-hidden="true">↓</span> 导入 Excel</button><button class="button button-outline" id="export-all"><span aria-hidden="true">↑</span> 导出 Excel</button></div></div>
+          <div class="search-row"><label class="search-field"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="搜索姓名、电话、邮箱或组织…" aria-label="搜索联系人"><kbd>/</kbd></label><span class="sort-hint">按姓名排序 <span aria-hidden="true">↓</span></span></div>
+          <div class="table-wrap"><table class="contact-table"><thead><tr><th scope="col">联系人</th><th scope="col">联系方式</th><th scope="col">公司 / 组织</th><th scope="col" class="favorite-column">收藏</th><th scope="col" class="actions-column">操作</th></tr></thead><tbody id="contact-list"></tbody></table></div>
+          <div class="empty-state" id="empty-state" hidden><span aria-hidden="true">⌕</span><h3 id="empty-title">还没有联系人</h3><p id="empty-description">从新建第一位联系人开始。</p><button class="button button-primary" id="empty-add">新建联系人</button></div>
+          <footer class="table-footer"><span id="footer-count">共 0 位联系人</span><span>所有演示联系人均为虚构数据</span></footer>
+        </section>
+        <p class="privacy-note"><span aria-hidden="true">◇</span> 本项目无账号系统，联系人仅保存在当前浏览器。请定期导出 Excel 备份；清除浏览器数据将清除通讯录。</p>
+      </div>
+    </main>
+  </div>
+
+  <dialog id="contact-dialog" aria-labelledby="contact-dialog-title"><form id="contact-form" novalidate><div class="dialog-header"><div><p class="eyebrow">MAKE A CONNECTION</p><h2 id="contact-dialog-title">新建联系人</h2></div><button class="icon-button close-dialog" type="button" aria-label="关闭联系人表单">×</button></div><div class="dialog-content"><input type="hidden" id="contact-id"><div class="form-grid"><label>姓名 <span class="required">*</span><input id="contact-name" required maxlength="100" placeholder="请输入姓名" autocomplete="name"></label><label>公司 / 组织<input id="contact-company" maxlength="150" placeholder="例如：课程项目组" autocomplete="organization"></label></div><label class="favorite-check"><input id="contact-favorite" type="checkbox"> ☆ 标记为重要联系人</label><p class="form-tip">每类支持多个联系方式，空白项会自动忽略。</p><div id="method-fields"></div><label>备注<textarea id="contact-note" maxlength="1000" rows="3" placeholder="记录一点有关 TA 的事情…"></textarea></label><p class="form-error" id="form-error" role="alert" hidden></p></div><div class="dialog-footer"><button class="button button-outline close-dialog" type="button">取消</button><button class="button button-primary" type="submit">保存联系人</button></div></form></dialog>
+
+  <dialog id="detail-dialog" aria-labelledby="detail-title"><div class="dialog-header"><h2 id="detail-title">联系人详情</h2><button class="icon-button" data-close="detail-dialog" aria-label="关闭联系人详情">×</button></div><div id="detail-content" class="dialog-content"></div><div class="dialog-footer"><button class="button button-outline" data-close="detail-dialog">关闭</button><button class="button button-primary" id="detail-edit">编辑联系人</button></div></dialog>
+
+  <dialog id="import-dialog" aria-labelledby="import-title"><div class="dialog-header"><div><p class="eyebrow">BRING YOUR PEOPLE TOGETHER</p><h2 id="import-title">导入 Excel 通讯录</h2></div><button class="icon-button" data-close="import-dialog" aria-label="关闭导入窗口">×</button></div><div class="dialog-content"><p class="import-description">使用邻簿导出的文件或下载模板。每个联系人占一行，多项联系方式使用 JSON 字符串数组。</p><button id="download-template" class="text-button template-button">↓ 下载 Excel 导入模板</button><label class="upload-box" for="import-file"><span class="upload-symbol" aria-hidden="true">⇣</span><strong>选择 .xlsx 文件</strong><span>不超过 5 MB，每次最多 1,000 条联系人</span><input type="file" id="import-file" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"></label><div class="import-rules"><h3>导入规则</h3><p>格式检查通过后才会写入，任意一行有误则整份文件不导入。全部信息完全相同的联系人将跳过；同名但信息不同的联系人会新增，不会覆盖已有记录。</p></div><div id="import-result" class="import-result" hidden role="status"></div></div><div class="dialog-footer"><button class="button button-outline" data-close="import-dialog">取消</button><button id="confirm-import" class="button button-primary" disabled>确认导入</button></div></dialog>
+
+  <dialog id="delete-dialog" aria-labelledby="delete-title"><div class="dialog-header"><h2 id="delete-title">删除联系人？</h2></div><div class="dialog-content"><p id="delete-message"></p><p class="muted">删除后无法撤销，建议先导出备份。</p></div><div class="dialog-footer"><button class="button button-outline" data-close="delete-dialog">取消</button><button class="button button-danger" id="confirm-delete">确认删除</button></div></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>
