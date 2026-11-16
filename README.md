@@ -1,4 +1,4 @@
-# LinkBook — Extreme Programming Address Book
+# Linbook — Extreme Programming Address Book
 
 Software Engineering (FZU–MU), **Liu Peikun / 刘培坤, 832401213**. Individual assignment. Implementation, tests, media and Git history are provided for inspection.
 
@@ -46,4 +46,5 @@ Read [coding standards](docs/CODING_STANDARDS.md) and [architecture](docs/ARCHIT
 Contact data is stored in localStorage in this browser, not uploaded to a server. This prototype does not provide authentication, encryption, multi-device sync or shared databases. Export backups before clearing browser data. The repository and demonstration contain fictional contacts only.
 
 No upstream starter repository was supplied for this assignment; this is an original repository. The branch/PR/release workflow is used without claiming a fork. Optional deployment credit is not claimed for local execution or repository publication alone.
+
 
