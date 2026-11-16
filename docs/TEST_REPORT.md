@@ -33,26 +33,26 @@ The last test checks the actual workbook library rather than only testing an equ
 
 ## Browser checks
 
-The following cases were completed against the running local application. All named contacts in this run were fictional test records.
+The following cases were completed against the running local application. All named contacts in this run were fictional test records. Video timestamps in this table refer to the published 45-second supplementary overview; the individual source frames remain local working evidence.
 
 | Browser case | Observed result | Evidence |
 | --- | --- | --- |
-| Open the application | Six clearly labeled sample contacts appear; totals and methods are visible | `media/frame-001.jpg` |
-| Create Alex demo | Save two phone numbers, including a leading-zero value, plus an email, social account, address and favorite status | `media/frame-002.jpg` |
-| Search for the saved contact | The new record appears in the search results | `media/frame-003.jpg` |
-| Inspect complete contact details | Both phone values and the other methods are retained | `media/frame-004.jpg` |
-| Edit a contact | Updated note is saved successfully | `media/frame-005.jpg` |
-| Toggle favorite status and open favorites | Remove the favorite, add it again, and find it in the favorites view | `media/frame-006.jpg` |
-| Export Excel | A real `.xlsx` file contains all seven contacts, one contact per row | `media/frame-007.jpg`, `media/demo-export.xlsx` |
-| Inspect the exported workbook | The leading-zero phone value remains text and is preserved | `media/demo-export.xlsx` |
-| Reimport the exported workbook | Preview detects seven exact duplicates and skips all seven | `media/frame-008.jpg` |
-| Import a malformed email array containing `[123]` | The application rejects the complete import and makes no contact changes | `media/frame-009.jpg` |
-| Preview a valid Taylor demo import | Preview reports one new fictional contact | `media/frame-010.jpg` |
-| Confirm the valid import | Total increases from seven contacts to eight | `media/frame-011.jpg` |
-| Reload the page | All eight contacts remain, including the imported contact and its methods | `media/frame-012.jpg` |
-| Delete Taylor demo | Confirmation explicitly identifies the test contact to be removed | `media/frame-013.jpg` |
-| Search after deletion | No matching result remains; total returns to seven | `media/frame-014.jpg` |
-| Inspect the final application | Completed workflows leave a usable local address book | `media/frame-015.jpg` |
+| Open the application | Six clearly labeled sample contacts appear; totals and methods are visible | [Overview screenshot](media/01-overview.jpg) |
+| Create Alex demo | Save two phone numbers, including a leading-zero value, plus an email, social account, address and favorite status | [Multiple-method editor](media/02-multiple-methods.jpg) |
+| Search for the saved contact | The new record appears in the search results | [Supplementary video, 00:06](media/demo-step-by-step.mp4) |
+| Inspect complete contact details | Both phone values and the other methods are retained | [Contact detail screenshot](media/03-contact-detail.jpg) |
+| Edit a contact | Updated note is saved successfully | [Supplementary video, 00:12](media/demo-step-by-step.mp4) |
+| Toggle favorite status and open favorites | Remove the favorite, add it again, and find it in the favorites view | [Favorites screenshot](media/04-favorites.jpg) |
+| Export Excel | A real `.xlsx` file contains all seven contacts, one contact per row | [Supplementary video, 00:18](media/demo-step-by-step.mp4), [exported workbook](media/demo-export.xlsx) |
+| Inspect the exported workbook | The leading-zero phone value remains text and is preserved | [Exported workbook](media/demo-export.xlsx) |
+| Reimport the exported workbook | Preview detects seven exact duplicates and skips all seven | [Import preview screenshot](media/05-import-preview.jpg) |
+| Import a malformed email array containing `[123]` | The application rejects the complete import and makes no contact changes | [Import rejection screenshot](media/06-import-rejection.jpg) |
+| Preview a valid Taylor demo import | Preview reports one new fictional contact | [Supplementary video, 00:27](media/demo-step-by-step.mp4) |
+| Confirm the valid import | Total increases from seven contacts to eight | [Supplementary video, 00:30](media/demo-step-by-step.mp4) |
+| Reload the page | All eight contacts remain, including the imported contact and its methods | [Supplementary video, 00:33](media/demo-step-by-step.mp4) |
+| Delete Taylor demo | Confirmation explicitly identifies the test contact to be removed | [Supplementary video, 00:36](media/demo-step-by-step.mp4) |
+| Search after deletion | No matching result remains; total returns to seven | [Supplementary video, 00:39](media/demo-step-by-step.mp4) |
+| Inspect the final application | Completed workflows leave a usable local address book | [Final overview screenshot](media/07-final-overview.jpg) |
 
 ## Demonstration media
 
@@ -60,8 +60,8 @@ The following cases were completed against the running local application. All na
 - [Primary video provenance and section guide](FULL_VIDEO.md), including timing sources, workflow counts, file hash and decode verification.
 - [Primary video poster](media/demo-full-poster.jpg).
 - Supplementary: [step-by-step overview](media/demo-step-by-step.mp4) — 15 selected actual browser screenshots, three seconds per stage, 45 seconds in total.
-- Supplementary: [offline step-by-step viewer](media/demo-step-by-step.html), with previous, next and autoplay controls.
-- [Supplementary media verification record](media/demo-step-by-step.json): source screenshot hashes, captions and encoder/decode metadata.
+- Local-only supporting artifact: `media/demo-step-by-step.html`, an offline viewer with previous, next and autoplay controls; it is not included in the repository.
+- Local-only supporting artifact: `media/demo-step-by-step.json`, containing source screenshot hashes, captions and encoder/decode metadata; it is not included in the repository.
 
 The full operation video is the primary running demonstration. Its five sections show create/search, details/edit/favorites, export/duplicate import, invalid/valid import/reload, and confirmed deletion. It starts with seven contacts, adds Morgan demo to reach eight, imports Taylor demo to reach nine, then removes the two recording-specific test contacts to return to seven. The recorded empty favorites result after removing favorite status is retained as valid application behavior.
 
